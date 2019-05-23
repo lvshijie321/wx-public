@@ -10,7 +10,12 @@ const url = require("url");
 router.get("/", (req, res) => {
   const query = url.parse(req.url, true).query;
   weixinJsConfig({ appId, appSecret, url: query.url }, (error, { appId, nonceStr,timestamp, signature }) => {
-    res.send(error ? {error: {}} : { appId, nonceStr,timestamp, signature })
+    res.send(error ? {error: {}} : { 
+      code: 0,
+      data: {
+        appId, nonceStr,timestamp, signature
+      }
+     })
   });
 });
 
